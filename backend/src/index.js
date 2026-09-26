@@ -48,6 +48,16 @@ app.use('/api/confirmations', confirmationRoutes);
 app.use('/api/sms', smsRoutes);
 app.use('/api/admin', adminRoutes);
 
+// Serve static frontend in production or when frontend/dist is built
+const frontendDist = path.join(__dirname, '..', '..', 'frontend', 'dist');
+const fs = require('fs');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get('*', (_req, res) => {
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
+
 // Periodic SMS grace / expiry processing
 setInterval(async () => {
   try {
