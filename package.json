@@ -1,0 +1,12 @@
+{
+  "name": "med-guard",
+  "private": true,
+  "version": "0.1.0",
+  "description": "MED-GUARD one-hospital pilot",
+  "scripts": {
+    "dev:api": "npm --prefix backend run dev",
+    "dev:web": "npm --prefix frontend run dev",
+    "start:api": "npm --prefix backend start",
+    "build:web": "npm --prefix frontend run build"
+  }
+}

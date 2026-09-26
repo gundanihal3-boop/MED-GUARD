@@ -1,0 +1,10 @@
+{
+  "name": "MED-GUARD",
+  "short_name": "MED-GUARD",
+  "description": "Government hospital accountability pilot",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e8f1ef",
+  "theme_color": "#0b6b4f",
+  "lang": "en"
+}
