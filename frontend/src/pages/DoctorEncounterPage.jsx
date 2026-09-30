@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { api } from '../api';
 
@@ -36,7 +36,7 @@ export default function DoctorEncounterPage() {
   const [error, setError] = useState('');
   const [message, setMessage] = useState('');
 
-  async function load() {
+  const load = useCallback(async () => {
     const [enc, meds] = await Promise.all([
       api(`/encounters/${id}`),
       api('/prescriptions/medicines'),
@@ -50,11 +50,11 @@ export default function DoctorEncounterPage() {
     } catch {
       setBundle(null);
     }
-  }
+  }, [id]);
 
   useEffect(() => {
     load().catch((e) => setError(e.message));
-  }, [id]);
+  }, [load]);
 
   const canComplete = encounter?.status === 'in_consultation';
   const canPrescribe = encounter && ['in_consultation', 'consultation_completed', 'confirmation_pending', 'confirmed_tablet', 'confirmed_sms'].includes(encounter.status);
